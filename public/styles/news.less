@@ -1,0 +1,37 @@
+/* news ----------------------------------------------------------------------------------------
+*/
+
+article {
+	margin-bottom: 25px;
+	z-index: 0;
+}
+.art-text {
+	font-size: 0.8em;
+	line-height: 1.3em;
+	text-align: justify;
+	text-indent: 15px;
+}
+.art-info {
+	color: @txt-color;
+	margin-top: 10px;
+}
+.delete {
+	color: red;
+	position: absolute;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+}
+#form {
+	margin-bottom: 30px;
+	form {
+		input[type="text"], textarea {
+			width: 100%;
+			resize: none;
+		}
+		p {
+			color: darken(@txt-color, 5%);
+			font-weight: bold;
+		}
+	}
+}

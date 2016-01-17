@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Система тестирования знаний</title>
+	<!-- styles/fonts -->
+	<link rel="stylesheet" type="text/css" media="all" href="/styles/mainPage.css">
+	<link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
+	<!-- libraries -->
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.4.1/es5-shim.min.js"></script>
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" type="text/css" media="all" href="/styles/main-ie.css">
+	<![endif]-->
+	<script src="/scripts/show-hide.js"></script>
+	<script src="/scripts/slider.js"></script>
+</head>
+<body>
+	<header class="clearfix ie-hd">
+		<div id="logo">
+			<a href="/index.html"><img src="/images/logo.png" alt="СТЗ"></a>
+			<a href="#" class="toggle-menu" rel="#menu"><img src="/images/show-menu-icon.png" width="50px" alt="menu"></a>
+		</div>
+		<div id="navigation">
+			<div id="slider">
+				<ul>
+					<li><img src="/images/slider/1.jpg" alt="sl-image"></li>
+					<li><img src="/images/slider/2.jpg" alt="sl-image"></li>
+					<li><img src="/images/slider/3.jpg" alt="sl-image"></li>
+				</ul>
+			</div>
+			<nav id="menu">
+				<ul>
+					<li class="main-item">
+						<a href="">Новости</a>
+					</li>
+					<li class="main-item">
+						<a href="/tests">Тесты</a>
+						<ul class="popup">
+							<li><a href="/tests/">Все тесты</a></li>
+							<li><a href="/tests/add_test/">Добавить тест</a></li>
+						</ul>
+					<li class="main-item corner-radius"><a href="/contacts">Контакты</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<aside id="optional-menu">
+	</aside>
+	<div id="main">
+		<div id="bread-crumbs"></div>
+
+		<section id="section">
+			<a href="#" rel="#form">Добавить новость</a>
+			<div id="form" style="display:none">
+				<form method="POST" action="/news-data">
+					<p>Тема:</p><input type="text" name="title" maxlength="150">
+					<p>Текст:</p><textarea name="text" id="" cols="30" rows="10" maxlength="1000"></textarea>
+					<input type="text" name="author" value="Scaar" hidden>
+					<input type="text" name="date" value="" hidden>
+					<input type="submit" value="добавить">
+				</form>
+			</div>
+			<div id="content">
+				<script type="text/template" id="articles">
+					<% news.forEach(function(item) { 
+						var date = new Date(item.date);
+						date = date.getDate() + "." + (date.getMonth()+1) + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+						%>
+						<article>
+							<a href="#" class="delete" data-id="<%= item.id %>">x</a>
+							<h2><%= item.title %></h2>
+							<p class="art-text"><%= item.text %></p>
+							<p class="art-info">Дата:&nbsp;<span class="date"><%= date %></span></p>
+						</article>
+						<!-- / -->
+					<% }) %>
+				</script>
+			</div>
+		</section>
+	</div>
+	<footer class="ie-ft">
+		<span>Created By: Bohdan Huseinov</span>
+	</footer>
+	
+	<!-- page scripts -->
+	<script src="/scripts/polyfills.js"></script>
+	<script src="/scripts/templates.js"></script>
+	<script src="/scripts/news_OOP.js"></script>
+	<script>
+		var navigation = new Navigation(10, '/news-data');
+		$(function() {
+			navigation.makeRequest("news");
+		})
+		// additional event showHide news
+		$("#section > a").showHide({duration: 500});
+
+		var date = new Date().getTime();
+		var dateInp = document.querySelector("input[name='date']");
+		dateInp.value = date;
+	</script>
+	<script src="/scripts/breadcrumbs.js"></script>
+</body>
+</html>

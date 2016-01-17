@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Система тестирования знаний</title>
+	<!-- styles/fonts -->
+	<link rel="stylesheet" type="text/css" media="all" href="/styles/mainPage.css">
+	<link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
+	<!-- libraries -->
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.4.1/es5-shim.min.js"></script>
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" type="text/css" media="all" href="/styles/main-ie.css">
+	<![endif]-->
+	<script src="/scripts/show-hide.js"></script>
+	<script src="/scripts/slider.js"></script>
+</head>
+<body>
+	<header class="clearfix ie-hd">
+		<div id="logo">
+			<a href="/index.html"><img src="/images/logo.png" alt="СТЗ"></a>
+			<a href="#" class="toggle-menu" rel="#menu"><img src="/images/show-menu-icon.png" width="50px"></a>
+		</div>
+		<div id="navigation">
+			<div id="slider">
+				<ul>
+					<li><img src="/images/slider/1.jpg" alt=""></li>
+					<li><img src="/images/slider/2.jpg" alt=""></li>
+					<li><img src="/images/slider/3.jpg" alt=""></li>
+				</ul>
+			</div>
+			<nav id="menu">
+				<ul>
+					<!-- <li class="main-item"><a href="/index.html">Главная</a></li> -->
+					<li class="main-item">
+						<a href="/">Новости</a>
+					</li>
+					<li class="main-item">
+						<a href="/tests">Тесты</a>
+						<ul class="popup">
+							<li><a href="/tests/">Все тесты</a></li>
+							<li><a href="/tests/add_test/">Добавить тест</a></li>
+						</ul>
+					</li class="main-item">
+					<li class="main-item corner-radius"><a href="/contacts">Контакты</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<aside id="optional-menu">
+		
+	</aside>
+	<div id="main">
+		<div id="bread-crumbs"></div>
+		<section id="section">
+			<h2>Добавление теста</h2>
+			<div id="content">
+				<div id="question">
+					<p class="description">Добавьте нужное количество вопросов.</p>
+					<form id="questionForm">
+						<script type="text/template" id="question">
+							<p>Вопрос:<span class="required"></p><input type="text" name="question">
+							<p>Дополнитеьный код:</p><textarea name="code"></textarea>
+							<p>Варианты ответа:<span class="required"></p>
+							<div class="answer">
+								<input type="radio" name="rightAnswer" value="0" id="r-0" checked>
+								<label for="r-0"></label>
+								&nbsp;
+								<input type="text" name="answer1" class="inp-answers">
+							</div>
+							<div class="answer">
+								<input type="radio" name="rightAnswer" value="1" id="r-1">
+								<label for="r-1"></label>
+								&nbsp;
+								<input type="text" name="answer2" class="inp-answers">
+							</div>
+							<a href="#" title="Добавить вариант ответа" id="add-answer">+</a>
+							<br>
+						</script>
+					</form>
+				<br>
+				<button id="addQuestion">Добавить вопрос</button>
+				</div>
+				<div id="questions-preview">
+					<p class="description">Здесь будет список добавленных вопросов.</p>
+					<script type="text/template" id="questions-preview-template">
+						<% data.questions.forEach(function (questionObj, number) { %>
+						<div class="preview-question">
+							<span><%= number+1 %></span>
+							<div class="question-info">
+								<p><u>Вопрос</u>: <%= questionObj.question %></p>
+								<p><u>Ответы</u>:</p>
+								<span class="pr-answers">
+								<%
+									questionObj.answers.forEach(function(answer, i) { 
+										var rClass = (i === questionObj.rightAnswer) ? "right-answer" : "";
+								%>
+									<p title="<%= answer %>" class="<%= rClass %>"><%= (i+1) + ". " + answer %></p>
+								<%
+									});
+								%>
+								</span>
+								<a href="#" class="q-delete" data-id="<%= number %>">Удалить</a>
+							</div>
+						</div>
+						<% }) %>
+					</script>
+				</div>
+				<div id="test">
+					<p id="test-name">Название Теста<br>
+					<span class="required"></span> <input type="text" name="title"></p>
+					<p>Отведенное время: 
+					<select name="time">
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="15">15</option>
+						<option value="20" selected>20</option>
+						<option value="25">25</option>
+						<option value="30">30</option>
+					</select>
+					мин.</p>
+					<button id="add-test" disabled>Добавить тест</button>
+				</div>
+			</div>
+		</section>
+	</div>
+	<footer class="ie-ft">
+		<span>Created By: Bohdan Huseinov</span>
+	</footer>
+
+	<!-- page scripts -->
+	<script src="/scripts/polyfills.js"></script>
+	<script src="/scripts/templates.js"></script>
+	<script src="/scripts/breadcrumbs.js"></script>
+	<script src="/scripts/addTest.js"></script>
+	<script>
+		var testAdder = new TestAdder("addQuestion", "add-test");
+		$(function() {
+			testAdder.renderQuestionForm("questionForm", "add-answer");
+		});
+	</script>
+</body>
+</html>

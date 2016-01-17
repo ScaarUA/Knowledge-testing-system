@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Система тестирования знаний</title>
+	<!-- styles/fonts -->
+	<link rel="stylesheet" type="text/css" media="all" href="/styles/mainPage.css">
+	<link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
+	<!-- libraries -->
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.4.1/es5-shim.min.js"></script>
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" type="text/css" media="all" href="/styles/main-ie.css">
+	<![endif]-->
+	<script src="/scripts/show-hide.js"></script>
+	<script src="/scripts/slider.js"></script>
+</head>
+<body>
+	<header class="clearfix ie-hd">
+		<div id="logo">
+			<a href="/index.html"><img src="/images/logo.png" alt="СТЗ"></a>
+			<a href="#" class="toggle-menu" rel="#menu"><img src="/images/show-menu-icon.png" width="50px"></a>
+		</div>
+		<div id="navigation">
+			<div id="slider">
+				<ul>
+					<li><img src="/images/slider/1.jpg" alt=""></li>
+					<li><img src="/images/slider/2.jpg" alt=""></li>
+					<li><img src="/images/slider/3.jpg" alt=""></li>
+				</ul>
+			</div>
+			<nav id="menu">
+				<ul>
+					<!-- <li class="main-item"><a href="/index.html">Главная</a></li> -->
+					<li class="main-item">
+						<a href="/">Новости</a>
+					</li>
+					<li class="main-item">
+						<a href="/tests">Тесты</a>
+						<ul class="popup">
+							<li><a href="/tests/">Все тесты</a></li>
+							<li><a href="/tests/add_test/">Добавить тест</a></li>
+						</ul>
+					</li class="main-item">
+					<li class="main-item corner-radius"><a href="/contacts">Контакты</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<aside id="optional-menu">
+		
+	</aside>
+	<div id="main">
+		<div id="bread-crumbs"></div>
+		<section id="section">
+			<h2>Контакты</h2>
+			<div id="content">
+				<p><strong>Адрес</strong>: г.Киев, ул.Кибальчича 9</p>
+				<p><strong>Телефон</strong>: 063-469-86-61</p>
+				<div id="map"></div>
+			</div>
+		</section>
+	</div>
+	<footer class="ie-ft">
+		<span>Created By: Bohdan Huseinov</span>
+	</footer>
+
+	<!-- page scripts -->
+	<script src="/scripts/polyfills.js"></script>
+	<script src="/scripts/breadcrumbs.js"></script>
+	<script src="/scripts/maps.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi1_XM-qKj-81uXgcvMOgq6eVRr9lLn3k&callback=initMap"></script>
+</body>
+</html>

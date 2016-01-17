@@ -1,0 +1,118 @@
+/* tests-list ----------------------------------------------------------------------------------------
+*/
+.search {
+	width: 210px;
+	height: 20px;
+	margin: 0;
+	padding: 0;
+	background: white;
+	border: 1px inset #DCDCDC;
+	border-radius: 5px;
+	float: right;
+	span.search-icon {
+		display: inline-block;
+		width: 18px;
+		height: 18px;
+		background: url('/images/search.png') 100% 100%;
+		background-size: 100%;
+		vertical-align: middle;
+		margin-left: 5px;
+	}
+	input[type="text"] {
+		padding: 0 5px;
+		outline: none;
+		border: none;
+		height: inherit;
+		vertical-align: top;
+	}	
+}
+#content {
+	width: 80%;
+	table {
+		width: 99%;
+		margin: 0 auto;
+		min-width: 400px;
+		transition: all 0.3s;
+		box-shadow: 0 0 10px -2px black;
+		@media only screen and (max-width: 800px) {
+			margin: 0 auto;
+		}
+		// th:not(:nth-child(2)), td:not(:nth-child(2)) {
+		// 	width: 10%;
+		// }
+		th:nth-child(2), td:nth-child(2) {
+			width: 70%;
+			max-width: 200px;
+		}
+		th:last-child {
+			min-width: 80px;
+		}
+		thead {
+			@bg: #6F9CF0;
+			tr {
+				text-align: center;
+				background: lighten(@bg, 7%);
+				line-height: 20px;
+				border-bottom: 1px solid @main-color;
+			}
+			th {
+				vertical-align: middle;
+				cursor: pointer;
+			}
+			th:not(:last-child):hover {
+				background: darken(@bg, 10%);
+			}
+			th:not(:last-child) {
+				border-right: 1px solid darken(@bg, 5%);
+			}
+		}
+		tbody {
+			tr {
+				background: lighten(@main-color, 10%);
+				color: darken(@txt-color, 10%);
+			}
+			tr:nth-child(2n+1) {
+				background: @main-color;
+			}
+			td {
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				text-align: center;
+				padding: 0 10px;
+				box-sizing: border-box;
+				a {
+					overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				}
+			}
+			td:not(:last-child) {
+				border-right: 1px solid darken(lighten(@main-color, 10%), 5%);
+			}
+			td:nth-child(2) {
+				text-align: left;
+			}
+		}
+	}
+	table:hover {
+		width: 100%;
+		box-shadow: none;
+	}
+}
+.test-name {
+	text-decoration: none;
+	font-size: 1.2em;
+	color: darken(@txt-color, 10%);
+	font-weight: bold;
+}
+.test-name:hover {
+	color: blue;
+}
+.test-pass {
+	text-decoration: none;
+	color: #246AB5;
+}
+.test-pass:hover {
+	background: #CABE8B;
+}

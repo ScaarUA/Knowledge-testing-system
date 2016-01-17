@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Система тестирования знаний</title>
+	<!-- styles/fonts -->
+	<link rel="stylesheet" type="text/css" media="all" href="/styles/mainPage.css">
+	<link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
+	<!-- libraries -->
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.4.1/es5-shim.min.js"></script>
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" type="text/css" media="all" href="/styles/main-ie.css">
+	<![endif]-->
+	<script src="/scripts/show-hide.js"></script>
+	<script src="/scripts/slider.js"></script>
+</head>
+<body>
+	<header class="clearfix ie-hd">
+		<div id="logo">
+			<a href="/index.html"><img src="/images/logo.png" alt="СТЗ"></a>
+			<a href="#" class="toggle-menu" rel="#menu"><img src="/images/show-menu-icon.png" width="50px"></a>
+		</div>
+		<div id="navigation">
+			<div id="slider">
+				<ul>
+					<li><img src="/images/slider/1.jpg" alt=""></li>
+					<li><img src="/images/slider/2.jpg" alt=""></li>
+					<li><img src="/images/slider/3.jpg" alt=""></li>
+				</ul>
+			</div>
+			<nav id="menu">
+				<ul>
+					<!-- <li class="main-item"><a href="/index.html">Главная</a></li> -->
+					<li class="main-item">
+						<a href="/">Новости</a>
+					</li>
+					<li class="main-item">
+						<a href="/tests">Тесты</a>
+						<ul class="popup">
+							<li><a href="/tests/">Все тесты</a></li>
+							<li><a href="/tests/add_test/">Добавить тест</a></li>
+						</ul>
+					</li class="main-item">
+					<li class="main-item corner-radius"><a href="/contacts">Контакты</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<aside id="optional-menu">
+	</aside>
+	<div id="main">
+		<div id="bread-crumbs"></div>
+		<section id="section">
+			<a href="add_test/" class="add-test">Добавить тест</a>
+			<div class="search"><span class="search-icon"></span><input type="text" class="search-inp"></div>
+			<script>
+			var search = $(".search"),
+				sBorder = search.css("border");
+			search.find("input[type='text']").focus(function(){
+				$(this).parent().css("border", "1px solid #6293FB");
+			}).blur(function(){
+				$(this).parent().css("border", sBorder)
+			})
+			</script>
+			<div id="content">
+				<script type="text/template" id="tests-list">
+					<table id="table-test-list">
+						<thead>
+							<tr>
+								<th data-type="number">№</th>
+								<th data-type="string">Название</th>
+								<th data-type="number">Кол-во вопросов</th>
+								<th data-type="number">Отведенное время(мин)</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+					<% data.forEach(function(test, i) { 
+						var link = "/tests/test_pass?link=" + test.url + "&time=" + test.time;
+						%>
+							<tr>
+								<td><%= i+1 %>.</td>
+								<td><a href="<%= link %>" rel="<%- test.url.slice(1) %>" title="<%= test.name %>" class="test-name"><%= test.name %></a></td>
+								<td><%= test.qstAmount %></td>
+								<td><%= test.time/60 %></td>
+								<td><a href="<%= link %>" class="test-pass">Пройти</a></td>
+							</tr>
+					<%
+						})
+					%>
+						</tbody>
+					</table>
+				</script>
+			</div>
+		</section>
+	</div>
+	<footer class="ie-ft">
+		<span>Created By: Bohdan Huseinov</span>
+	</footer>
+
+	<!-- page scripts -->
+	<script src="/scripts/polyfills.js"></script>
+	<script src="/scripts/templates.js"></script>
+	<script src="/scripts/breadcrumbs.js"></script>
+	<script src="/scripts/tests.js"></script>
+	<script src="/scripts/table-sort.js"></script>
+	<script src="/scripts/test-search.js"></script>
+	<script>
+		$("#section > a").showHide({duration: 500});
+		var tests = new Test();
+		$(function() {
+			tests.getTestsList('/tests/list');
+		});
+	</script>
+</body>
+</html>

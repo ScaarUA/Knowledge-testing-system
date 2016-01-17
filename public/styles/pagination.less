@@ -1,0 +1,30 @@
+/* pagination ----------------------------------------------------------------------------------------
+*/
+
+#pageLine {
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	.page-id {
+		display: inline-block;
+		background: lighten(@main-color, 15%);
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		// float: left;
+		margin: 0 10px;
+		box-shadow: -1px 1px 2px black;
+		text-align: center;
+		color: @txt-color;
+	}
+	.page-active {
+		// border-radius: 0;
+		// height: 10px;
+		// margin: 5px 10px;
+		background: @main-color;
+	}
+	.page-id:hover, .page-active:hover {
+		background: darken(@main-color, 10%);
+		cursor: pointer;
+	}
+}
